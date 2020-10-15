@@ -27,10 +27,10 @@ public class GymTest {
     @Test
     public final void getMembershipStatusTest() {
 
-        assertEquals(g.getMembershipStatus(notMember), MembershipStatus.NOT_MEMBER);
-        assertEquals(g.getMembershipStatus(member1), MembershipStatus.ACTIVE);
-        assertEquals(g.getMembershipStatus(member2), MembershipStatus.FORMER);
-        assertNotEquals(g.getMembershipStatus(notMember), MembershipStatus.ACTIVE);
+        assertEquals(g.getMembershipStatus("Bali"), MembershipStatus.NOT_MEMBER);
+        assertEquals(g.getMembershipStatus("Alhambra Aromes"), MembershipStatus.ACTIVE);
+        assertEquals(g.getMembershipStatus("8512021234"), MembershipStatus.FORMER);
+        assertNotEquals(g.getMembershipStatus("Chamade Coriola"), MembershipStatus.ACTIVE);
     }
 
     @Test
@@ -40,5 +40,15 @@ public class GymTest {
         assertFalse(g.isMember("Bear "));
         assertFalse(g.isMember("123318327"));
         assertTrue(g.isMember("8512021234"));
+    }
+
+    @Test
+    public final void getMemberFromListTest() {
+
+        assertNull(g.getMemberFromList("Bali"));
+        assertEquals(g.getGymMembers().get(0), g.getMemberFromList("7603021234"));
+        assertEquals(g.getGymMembers().get(2), g.getMemberFromList("Chamade Coriola"));
+        assertNotEquals(g.getGymMembers().get(1), g.getMemberFromList("Bali"));
+        assertEquals(member1.toString(), g.getMemberFromList("Alhambra Aromes").toString());
     }
 }

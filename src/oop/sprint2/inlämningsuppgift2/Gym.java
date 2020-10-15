@@ -1,7 +1,5 @@
 package oop.sprint2.inlämningsuppgift2;
 
-import java.sql.Time;
-import java.time.Instant;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -32,12 +30,14 @@ public class Gym {
                 : new FileUtil().createListFromFile();
     }
 
-    public MembershipStatus getMembershipStatus(Member member) {
+    public MembershipStatus getMembershipStatus(String input) {
 
-        if (isMember(member.getName()) || isMember(member.getPersonalNo())) {
+        if (isMember(input)) {
+            Member member = this.getMemberFromList(input);
+
             LocalDate today = LocalDate.now();
             int year = today.isLeapYear() ? 366 : 365;
-            int membershipDays = new TimeUtil().getMembershipDays(member.getDateJoined());
+            int membershipDays = new TimeUtil().getMembershipDays(member.getLastPayment());
 
             if (membershipDays - year <= 0)
                 return MembershipStatus.ACTIVE;
@@ -51,11 +51,23 @@ public class Gym {
         input = input.trim();
         boolean isMember = false;
         for (Member m : this.gymMembers) {
-            if (input.equals(m.getName()) || input.equals(m.getPersonalNo())) {
+            if (input.equalsIgnoreCase(m.getName()) || input.equalsIgnoreCase(m.getPersonalNo())) {
                 isMember = true;
                 break;
             }
         }
         return isMember;
+    }
+
+    public Member getMemberFromList(String input) {
+        for (Member m : gymMembers) {
+            if (input.equalsIgnoreCase(m.getName()) || input.equalsIgnoreCase(m.getPersonalNo()))
+                return m;
+        }
+        return null;
+    }
+
+    public List<Member> getGymMembers() {
+        return this.gymMembers;
     }
 }

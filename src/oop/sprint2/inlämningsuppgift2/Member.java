@@ -1,5 +1,6 @@
 package oop.sprint2.inlämningsuppgift2;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 /**
@@ -9,16 +10,16 @@ import java.time.LocalDate;
  * 18:34
  */
 
-public class Member {
+public class Member implements Serializable {
 
     private String name;
     private String personalNo;
-    private LocalDate dateJoined;
+    private LocalDate lastPayment;
 
-    public Member(String personalNo, String name, LocalDate dateJoined) {
+    public Member(String personalNo, String name, LocalDate lastPayment) {
         this.personalNo = personalNo;
         this.name = name;
-        this.dateJoined = dateJoined;
+        this.lastPayment = lastPayment;
     }
 
     public String getName() {
@@ -29,12 +30,12 @@ public class Member {
         return this.personalNo;
     }
 
-    public LocalDate getDateJoined() {
-        return this.dateJoined;
+    public LocalDate getLastPayment() {
+        return this.lastPayment;
     }
 
     @Override
     public String toString() {
-        return this.getPersonalNo() + " " + this.getName() + " " + this.getDateJoined();
+        return this.getPersonalNo() + " " + this.getName() + " " + this.getLastPayment();
     }
 }

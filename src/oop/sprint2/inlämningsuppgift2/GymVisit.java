@@ -1,5 +1,6 @@
 package oop.sprint2.inlämningsuppgift2;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 /**
@@ -9,7 +10,7 @@ import java.time.LocalDate;
  * 18:34
  */
 
-public class GymVisit {
+public class GymVisit implements Serializable {
 
     private Member member;
     private LocalDate dateVisited;
