@@ -1,5 +1,7 @@
 package oop.sprint2.inlämningsuppgift2;
 
+import java.util.List;
+
 /**
  * Inlämningsuppgift_2 <br>
  * baliharko <br>
@@ -8,4 +10,15 @@ package oop.sprint2.inlämningsuppgift2;
  */
 
 public class Gym {
+
+    private List<Member> gymMembers;
+    FileUtil fileUtil = new FileUtil();
+
+    public Gym() {
+        this.gymMembers = fileUtil.createListFromFile();
+    }
+
+    public static MembershipStatus getMembershipStatus(Member member) {
+        return null; // Kollar namn, personnr och datum joined och ger tillbaka passande membershipstatus
+    }
 }

@@ -1,5 +1,7 @@
 package oop.sprint2.inlämningsuppgift2;
 
+import java.time.LocalDate;
+
 /**
  * Inlämningsuppgift_2 <br>
  * baliharko <br>
@@ -8,4 +10,24 @@ package oop.sprint2.inlämningsuppgift2;
  */
 
 public class GymVisit {
+
+    private Member member;
+    private LocalDate dateVisited;
+
+    public GymVisit(Member member) {
+        this.member = member;
+        this.dateVisited = LocalDate.now();
+    }
+
+    public String getMemberName() {
+        return this.member.getName();
+    }
+
+    public String getMemberPersonalNo() {
+        return this.member.getPersonalNo();
+    }
+
+    public LocalDate getDateVisited() {
+        return this.dateVisited;
+    }
 }
