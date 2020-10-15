@@ -14,24 +14,31 @@ public class Gym {
 
     boolean test;
     private List<Member> gymMembers;
+    private List<GymVisit> gymVisits;
 
     public Gym(boolean isTest) {
         this.test = true;
-        this.setGymMembers();
+        this.initGymMembersList();
+        this.initGymVisitsList();
     }
 
     public Gym() {
         this.test = false;
-        this.setGymMembers();
+        this.initGymMembersList();
+        this.initGymVisitsList();
     }
 
-    private void setGymMembers() {
-        this.gymMembers = this.test ? new FileUtil(true).createListFromFile()
-                : new FileUtil().createListFromFile();
+    private void initGymMembersList() {
+        this.gymMembers = this.test ? new FileUtil(true).initMembersList()
+                : new FileUtil().initMembersList();
+    }
+
+    private void initGymVisitsList() {
+        this.gymVisits = this.test ? new FileUtil(true).getVisitsFromFile()
+                : new FileUtil().getVisitsFromFile();
     }
 
     public MembershipStatus getMembershipStatus(String input) {
-
         if (isMember(input)) {
             Member member = this.getMemberFromList(input);
 

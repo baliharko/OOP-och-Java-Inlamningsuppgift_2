@@ -27,4 +27,10 @@ public class GymVisit implements Serializable {
     public LocalDate getDateVisited() {
         return this.dateVisited;
     }
+
+    @Override
+    public String toString() {
+        return String.format("%-10s %-10s %-10s", this.getMember().getName(), this.member.getPersonalNo(),
+                this.dateVisited);
+    }
 }

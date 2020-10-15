@@ -1,5 +1,7 @@
 package oop.sprint2.inlämningsuppgift2;
 
+import java.io.*;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
@@ -14,36 +16,36 @@ import java.util.Scanner;
  * 18:34
  */
 
-public class FileUtil {
+public class FileUtil implements Serializable{
 
     public boolean test;
-    private String fileInPath;
-    private String fileOutPath;
+    private String membersPath;
+    private String gymVisitsPath;
 
 
     public FileUtil(boolean isTest) {
         this.test = isTest;
-        this.setFileInPath();
-        this.setFileOutPath();
+        this.initMembersPath();
+        this.initGymVisitsPath();
     }
 
     public FileUtil() {
         this.test = false;
-        this.setFileInPath();
-        this.setFileOutPath();
+        this.initMembersPath();
+        this.initGymVisitsPath();
     }
 
-    private void setFileInPath() {
-        this.fileInPath = this.test ? "test/oop/sprint2/inlämningsuppgift2Test/customersTest.txt" :
+    private void initMembersPath() {
+        this.membersPath = this.test ? "test/oop/sprint2/inlämningsuppgift2Test/customersTest.txt" :
                 "src/oop/sprint2/inlämningsuppgift2/customers.txt";
     }
 
-    private void setFileOutPath() {
-        this.fileOutPath = this.test ? "test/oop/sprint2/inlämningsuppgift2Test/gymVisitsTest.txt" :
-                "src/oop/sprint2/inlämningsuppgift2/gymVisits.txt";
+    private void initGymVisitsPath() {
+        this.gymVisitsPath = this.test ? "test/oop/sprint2/inlämningsuppgift2Test/gymVisitsTest.ser" :
+                "src/oop/sprint2/inlämningsuppgift2/gymVisits.ser";
     }
 
-    public List<Member> createListFromFile() {
+    public List<Member> initMembersList() {
 
         List<Member> memberList = new ArrayList<>();
 
@@ -52,7 +54,7 @@ public class FileUtil {
         String line2;
         String[] line1Tokens;
 
-        try(Scanner scan = new Scanner(this.getFileInPath())) {
+        try(Scanner scan = new Scanner(this.getMembersPath())) {
             while(scan.hasNextLine() && !(line1 = scan.nextLine().trim()).isBlank()) {
                 line1Tokens = line1.split(",");
                 if (scan.hasNextLine() && !(line2 = scan.nextLine().trim()).isBlank()) {
@@ -70,11 +72,70 @@ public class FileUtil {
         return memberList;
     }
 
-    public Path getFileInPath() {
-        return Paths.get(this.fileInPath);
+    public Path getMembersPath() {
+        return Paths.get(this.membersPath);
     }
 
-    public Path getFileOutPath() {
-        return Paths.get(this.fileOutPath);
+    public Path getGymVisitsPath() {
+        return Paths.get(this.gymVisitsPath);
+    }
+
+    public void addToVisitsFile(Member member) {
+        List<GymVisit> visits = getVisitsFromFile();
+        try(ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(
+                this.getGymVisitsPath().toString()))) {
+
+            visits.add(new GymVisit(member));
+            out.writeObject(visits);
+        } catch(IOException e) {
+            System.out.println("Kunde inte skriva till fil.");
+            e.printStackTrace();
+        }
+    }
+
+    public void initVisitsFile() {
+        List<GymVisit> list = new ArrayList<>();
+
+        if (!new File(this.gymVisitsPath).exists()) {
+            try(ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(this.gymVisitsPath))) {
+                out.writeObject(list);
+                out.close();
+                System.out.println(" - en ny har skapats @ " + this.gymVisitsPath);
+            } catch (IOException e) {
+                System.out.println("Kunde inte skriva till filen.");
+                e.printStackTrace();
+            } catch (Exception e) {
+                System.out.println("Ett fel har inträffat.");
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void deleteVisitsFile() {
+        try {
+            Files.delete(this.getGymVisitsPath());
+        } catch(IOException e) {
+            System.out.println("Kunde inte radera filen.");
+            e.printStackTrace();
+        }
+    }
+
+    public List<GymVisit> getVisitsFromFile() {
+        List<GymVisit> gymVisits = null;
+        this.initVisitsFile();
+
+        try(ObjectInputStream in = new ObjectInputStream(new FileInputStream(this.gymVisitsPath))) {
+            gymVisits = (List<GymVisit>) in.readObject();
+
+        } catch(FileNotFoundException e) {
+            System.out.println("Kunde inte hitta filen.");
+            e.printStackTrace();
+        } catch(IOException e) {
+            System.out.println("Kunde inte läsa från fil.");
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return gymVisits;
     }
 }
