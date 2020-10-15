@@ -28,11 +28,13 @@ public class Gym {
         this.initGymVisitsList();
     }
 
+    // read list of members from file using FileUtil-class
     private void initGymMembersList() {
         this.gymMembers = this.test ? new FileUtil(true).initMembersList()
                 : new FileUtil().initMembersList();
     }
 
+    // read list of gymvisits from file using FileUtil-class
     private void initGymVisitsList() {
         this.gymVisits = this.test ? new FileUtil(true).getVisitsFromFile()
                 : new FileUtil().getVisitsFromFile();
@@ -54,6 +56,7 @@ public class Gym {
         return MembershipStatus.NOT_MEMBER;
     }
 
+    // Check if input is in list of members
     public boolean isMember(String input) {
         input = input.trim();
         boolean isMember = false;
@@ -66,6 +69,7 @@ public class Gym {
         return isMember;
     }
 
+    // Get member from list if found, otherwise returns null
     public Member getMemberFromList(String input) {
         for (Member m : gymMembers) {
             if (input.equalsIgnoreCase(m.getName()) || input.equalsIgnoreCase(m.getPersonalNo()))
@@ -76,5 +80,9 @@ public class Gym {
 
     public List<Member> getGymMembers() {
         return this.gymMembers;
+    }
+
+    public List<GymVisit> getGymVisits() {
+        return this.gymVisits;
     }
 }

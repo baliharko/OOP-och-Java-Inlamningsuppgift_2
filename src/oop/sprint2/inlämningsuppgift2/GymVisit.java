@@ -30,7 +30,7 @@ public class GymVisit implements Serializable {
 
     @Override
     public String toString() {
-        return String.format("%-10s %-10s %-10s", this.getMember().getName(), this.member.getPersonalNo(),
+        return String.format("%-20s %-18s %-10s", this.getMember().getName(), this.member.getPersonalNo(),
                 this.dateVisited);
     }
 }

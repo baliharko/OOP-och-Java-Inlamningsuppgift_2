@@ -57,18 +57,15 @@ public class FileUtil implements Serializable{
         try(Scanner scan = new Scanner(this.getMembersPath())) {
             while(scan.hasNextLine() && !(line1 = scan.nextLine().trim()).isBlank()) {
                 line1Tokens = line1.split(",");
-                if (scan.hasNextLine() && !(line2 = scan.nextLine().trim()).isBlank()) {
+                if (scan.hasNextLine() && !(line2 = scan.nextLine().trim()).isBlank())
                     dateJoined = LocalDate.parse(line2);
-                }
 
                 memberList.add(new Member(line1Tokens[0].trim(), line1Tokens[1].trim(), dateJoined));
             }
-
         } catch(Exception e) {
             System.out.println("Kunde inte läsa in från fil.");
             e.printStackTrace();
         }
-
         return memberList;
     }
 
@@ -101,6 +98,7 @@ public class FileUtil implements Serializable{
                 out.writeObject(list);
                 out.close();
                 System.out.println(" - en ny har skapats @ " + this.gymVisitsPath);
+
             } catch (IOException e) {
                 System.out.println("Kunde inte skriva till filen.");
                 e.printStackTrace();
