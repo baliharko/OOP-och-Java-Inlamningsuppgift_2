@@ -39,7 +39,7 @@ public class Gym_Main {
             // Main menu
             System.out.println("* * * * * * * * * MENY * * * * * * * * *\n");
             System.out.println("Ange 1, 2 eller 3 för att:\n");
-            System.out.println("1. Söka efter medlem\n2. Se lista över gymbesök\n3. Avsluta");
+            System.out.println("1. Söka efter medlem\n2. Se lista över alla gymbesök\n3. Avsluta");
 
             String input = scan.nextLine();
 
