@@ -45,8 +45,8 @@ public class FileUtil implements Serializable{
                 "src/oop/sprint2/inlämningsuppgift2/gymVisits.ser";
     }
 
+    // reads customers file and returns a list of members
     public List<Member> initMembersList() {
-
         List<Member> memberList = new ArrayList<>();
 
         LocalDate dateJoined = null;
@@ -90,6 +90,7 @@ public class FileUtil implements Serializable{
         }
     }
 
+    // Creating and setting up new .ser file if none in path
     public void initVisitsFile() {
         List<GymVisit> list = new ArrayList<>();
 
@@ -118,9 +119,11 @@ public class FileUtil implements Serializable{
         }
     }
 
+    // reads .ser file and returns list of gymvisits
     public List<GymVisit> getVisitsFromFile() {
         List<GymVisit> gymVisits = null;
-        this.initVisitsFile();
+
+        this.initVisitsFile(); // creation and setup of new file if none
 
         try(ObjectInputStream in = new ObjectInputStream(new FileInputStream(this.gymVisitsPath))) {
             gymVisits = (List<GymVisit>) in.readObject();

@@ -29,12 +29,14 @@ public class Gym {
     }
 
     // read list of members from file using FileUtil-class
+    // checks if instance is test
     private void initGymMembersList() {
         this.gymMembers = this.test ? new FileUtil(true).initMembersList()
                 : new FileUtil().initMembersList();
     }
 
     // read list of gymvisits from file using FileUtil-class
+    // checks if instance is test
     private void initGymVisitsList() {
         this.gymVisits = this.test ? new FileUtil(true).getVisitsFromFile()
                 : new FileUtil().getVisitsFromFile();

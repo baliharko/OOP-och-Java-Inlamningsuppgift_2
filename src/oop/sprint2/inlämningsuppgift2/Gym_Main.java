@@ -1,5 +1,6 @@
 package oop.sprint2.inlämningsuppgift2;
 
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -26,6 +27,7 @@ public class Gym_Main {
             System.exit(0);
     }
 
+    // Starts program
     public void init() {
         Gym gym = new Gym();
         FileUtil fileUtil = new FileUtil();
@@ -82,11 +84,12 @@ public class Gym_Main {
                 }
             } else if (input.equalsIgnoreCase("2")) { // See list of gymvisits
 
-                fileUtil.initVisitsFile();
+                List<GymVisit> visits = fileUtil.getVisitsFromFile();
+
                 clearTerminal();
                 System.out.println(String.format("%-20s %-18s %-10s", "Namn", "Personnummer", "Datum"));
                 System.out.println("==================================================");
-                for (GymVisit v : gym.getGymVisits()) {
+                for (GymVisit v : visits) {
                     System.out.println(v.toString());
                 }
                 System.out.println("\nTryck [Enter] för att gå till huvudmenyn");
