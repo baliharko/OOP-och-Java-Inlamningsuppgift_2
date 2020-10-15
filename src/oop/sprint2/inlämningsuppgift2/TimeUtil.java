@@ -24,13 +24,14 @@ public class TimeUtil {
         this.today = getToday();
     }
 
+    // Sets today to fixed date if test
     public LocalDate getToday() {
         return this.test ? LocalDate.of(2020, 10, 15)
                 : LocalDate.now();
     }
 
-    public int getMembershipDays(LocalDate dateJoined) {
-        return (int) Duration.between(dateJoined.atStartOfDay()
-                ,today.atStartOfDay()).toDays();
+    // Check if last payment is within one year
+    public boolean isWithinOneYear(LocalDate lastPayment) {
+        return lastPayment.plusYears(1).isAfter(today);
     }
 }

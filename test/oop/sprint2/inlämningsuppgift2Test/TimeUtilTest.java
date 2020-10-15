@@ -18,15 +18,15 @@ public class TimeUtilTest {
 
     TimeUtil tu = new TimeUtil(true);
 
-    @Test
-    public final void getMembershipTimeTest() {
-        LocalDate joined = LocalDate.of(2020, 9, 1);
-        LocalDate joined2 = LocalDate.of(2012, 5, 11);
-        int actual = tu.getMembershipDays(joined);
-        int actual2 = tu.getMembershipDays(joined2);
+    LocalDate joined = LocalDate.of(2020, 9, 1);
+    LocalDate joined2 = LocalDate.of(2012, 5, 11);
+    LocalDate joined3 = LocalDate.of(2020, 1, 1);
 
-        assertEquals(44 ,actual);
-        assertNotEquals(43, actual);
-        assertEquals(3079, actual2);
+    @Test
+    public final void isWithinOneYearTest() {
+
+        assertTrue(tu.isWithinOneYear(joined));
+        assertFalse(tu.isWithinOneYear(joined2));
+        assertTrue(tu.isWithinOneYear(joined3));
     }
 }

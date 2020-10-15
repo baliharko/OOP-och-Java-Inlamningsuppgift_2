@@ -52,23 +52,32 @@ public class Gym_Main {
                     System.out.println("Ange besökarens namn eller personnummer: ");
                     input = scan.nextLine();
 
-                    String membershipText = "";
-
                     if (input != null && !input.isBlank()) {
 
                         switch (gym.getMembershipStatus(input)) {
                             case ACTIVE -> {
                                 Member activeMember = gym.getMemberFromList(input);
-                                membershipText = activeMember.getName() +
-                                        " är en aktiv medlem. Senaste betalningsdatum: " + activeMember.getLastPayment();
+                                System.out.println(activeMember.getName() +
+                                        " är en aktiv medlem. Senaste betalningsdatum: " + activeMember.getLastPayment()
+                                        + "\n");
+
+                                System.out.println(activeMember.getName() + "s besöksdatum:");
+
+                                List<GymVisit> visits = fileUtil.getVisitsFromFile();
+                                for (GymVisit v : visits) {
+                                    if (v.getMember().getPersonalNo().equalsIgnoreCase(activeMember.getPersonalNo()))
+                                        System.out.println(v.getDateVisited());
+                                }
 
                                 fileUtil.addToVisitsFile(activeMember);
                             }
-                            case FORMER -> membershipText = gym.getMemberFromList(input).getName() +
-                                    " är ej längre aktiv medlem. Senaste betalningsdatum: " + gym.getMemberFromList(input).getLastPayment();
-                            case NOT_MEMBER -> membershipText = "Besökaren är ej medlem och behöver först bli medlem för att få träna.";
+                            case FORMER -> System.out.println(gym.getMemberFromList(input).getName() +
+                                    " är ej längre aktiv medlem. Senaste betalningsdatum: "
+                                    + gym.getMemberFromList(input).getLastPayment());
+
+                            case NOT_MEMBER -> System.out.println(
+                                    "Besökaren är obehörig och behöver först bli medlem för att få träna.");
                         }
-                        System.out.println(membershipText);
                     }
                     else {
                         System.out.println("Ogiltig inmatning - (tom)");

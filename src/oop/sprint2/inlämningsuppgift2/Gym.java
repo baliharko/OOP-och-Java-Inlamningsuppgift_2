@@ -46,11 +46,7 @@ public class Gym {
         if (isMember(input)) {
             Member member = this.getMemberFromList(input);
 
-            LocalDate today = LocalDate.now();
-            int year = today.isLeapYear() ? 366 : 365;
-            int membershipDays = new TimeUtil().getMembershipDays(member.getLastPayment());
-
-            if (membershipDays - year <= 0)
+            if (new TimeUtil().isWithinOneYear(member.getLastPayment()))
                 return MembershipStatus.ACTIVE;
             else
                 return MembershipStatus.FORMER;

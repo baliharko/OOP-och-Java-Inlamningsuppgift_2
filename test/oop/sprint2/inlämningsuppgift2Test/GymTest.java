@@ -20,10 +20,6 @@ public class GymTest {
 
     Gym g = new Gym(true);
 
-    Member notMember = new Member("1231231312", "Bali", LocalDate.of(2019,1,12));
-    Member member1 = new Member("7603021234", "Alhambra Aromes", LocalDate.parse("2019-11-01"));
-    Member member2 = new Member("8512021234", "Chamade Coriola", LocalDate.parse("2017-03-12"));
-
     @Test
     public final void getMembershipStatusTest() {
 
@@ -44,6 +40,8 @@ public class GymTest {
 
     @Test
     public final void getMemberFromListTest() {
+
+        Member member1 = new Member("7603021234", "Alhambra Aromes", LocalDate.parse("2019-11-01"));
 
         assertNull(g.getMemberFromList("Bali"));
         assertEquals(g.getGymMembers().get(0), g.getMemberFromList("7603021234"));
