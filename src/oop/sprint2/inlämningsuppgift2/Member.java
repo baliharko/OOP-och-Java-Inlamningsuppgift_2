@@ -16,9 +16,9 @@ public class Member {
     private LocalDate dateJoined;
     MembershipStatus status;
 
-    public Member(String name, String personalNo, LocalDate dateJoined) {
-        this.name = name;
+    public Member(String personalNo, String name, LocalDate dateJoined) {
         this.personalNo = personalNo;
+        this.name = name;
         this.dateJoined = dateJoined;
         this.status = Gym.getMembershipStatus(this);
     }
@@ -29,5 +29,14 @@ public class Member {
 
     public String getPersonalNo() {
         return this.personalNo;
+    }
+
+    public LocalDate getDateJoined() {
+        return this.dateJoined;
+    }
+
+    @Override
+    public String toString() {
+        return this.getPersonalNo() + " " + this.getName() + " " + this.getDateJoined();
     }
 }
