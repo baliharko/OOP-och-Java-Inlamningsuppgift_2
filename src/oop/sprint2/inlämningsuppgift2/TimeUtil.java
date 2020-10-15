@@ -11,17 +11,26 @@ import java.time.*;
 
 public class TimeUtil {
 
-    public boolean test = false;
+    public boolean test;
     LocalDate today;
 
     public TimeUtil(boolean isTest) {
         this.test = isTest;
-        this.today = test ? LocalDate.of(2020, 10, 15)
+        this.today = getToday();
+    }
+
+    public TimeUtil() {
+        this.test = false;
+        this.today = getToday();
+    }
+
+    public LocalDate getToday() {
+        return this.test ? LocalDate.of(2020, 10, 15)
                 : LocalDate.now();
     }
 
-    public Duration getMembershipDays(LocalDate dateJoined) {
-        return Duration.between(dateJoined.atStartOfDay()
-                ,today.atStartOfDay());
+    public int getMembershipDays(LocalDate dateJoined) {
+        return (int) Duration.between(dateJoined.atStartOfDay()
+                ,today.atStartOfDay()).toDays();
     }
 }

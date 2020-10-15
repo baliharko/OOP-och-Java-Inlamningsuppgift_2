@@ -14,13 +14,11 @@ public class Member {
     private String name;
     private String personalNo;
     private LocalDate dateJoined;
-    MembershipStatus status;
 
     public Member(String personalNo, String name, LocalDate dateJoined) {
         this.personalNo = personalNo;
         this.name = name;
         this.dateJoined = dateJoined;
-        this.status = Gym.getMembershipStatus(this);
     }
 
     public String getName() {

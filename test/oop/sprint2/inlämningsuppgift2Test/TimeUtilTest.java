@@ -3,7 +3,6 @@ package oop.sprint2.inlämningsuppgift2Test;
 import oop.sprint2.inlämningsuppgift2.TimeUtil;
 import org.junit.jupiter.api.Test;
 
-import java.time.Duration;
 import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -23,8 +22,8 @@ public class TimeUtilTest {
     public final void getMembershipTimeTest() {
         LocalDate joined = LocalDate.of(2020, 9, 1);
         LocalDate joined2 = LocalDate.of(2012, 5, 11);
-        int actual = (int) tu.getMembershipDays(joined).toDays();
-        int actual2 = (int) tu.getMembershipDays(joined2).toDays();
+        int actual = tu.getMembershipDays(joined);
+        int actual2 = tu.getMembershipDays(joined2);
 
         assertEquals(44 ,actual);
         assertNotEquals(43, actual);

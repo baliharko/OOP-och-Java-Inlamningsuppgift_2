@@ -19,12 +19,8 @@ public class GymVisit {
         this.dateVisited = LocalDate.now();
     }
 
-    public String getMemberName() {
-        return this.member.getName();
-    }
-
-    public String getMemberPersonalNo() {
-        return this.member.getPersonalNo();
+    public Member getMember() {
+        return this.member;
     }
 
     public LocalDate getDateVisited() {

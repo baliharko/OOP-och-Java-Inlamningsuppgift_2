@@ -1,13 +1,8 @@
 package oop.sprint2.inlämningsuppgift2;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.lang.management.MemoryManagerMXBean;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -41,7 +36,6 @@ public class FileUtil {
     }
 
     public List<Member> createListFromFile() {
-
         Path fileIn = Paths.get(this.fileInPath);
         List<Member> memberList = new ArrayList<>();
 
@@ -51,7 +45,6 @@ public class FileUtil {
         String[] line1Tokens;
 
         try(Scanner scan = new Scanner(fileIn)) {
-
             while(scan.hasNextLine() && !(line1 = scan.nextLine().trim()).isBlank()) {
                 line1Tokens = line1.split(",");
                 if (scan.hasNextLine() && !(line2 = scan.nextLine().trim()).isBlank()) {
@@ -71,9 +64,5 @@ public class FileUtil {
 
     public String getFileInPath() {
         return this.fileInPath;
-    }
-
-    public Member getMemberFromFile() {
-        return null;
     }
 }

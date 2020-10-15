@@ -26,7 +26,7 @@ public class FileUtilTest {
 
         List<Member> actual = fu.createListFromFile();
         List<Member> expected = Arrays.asList(
-                new Member("7603021234", "Alhambra Aromes" , LocalDate.parse("2019-07-01")),
+                new Member("7603021234", "Alhambra Aromes" , LocalDate.parse("2019-11-01")),
                 new Member("8104021234", "Bear Belle", LocalDate.parse("2018-12-02")),
                 new Member("8512021234", "Chamade Coriola", LocalDate.parse("2017-03-12")));
 
@@ -39,16 +39,6 @@ public class FileUtilTest {
 
     @Test
     public final void writeToFileTest() {
-        // Skriv till fil
-    }
-
-    @Test
-    public final void searchFileTest() {
-
-    }
-
-    @Test
-    public final void getMemberFromFileTest() {
-
+        // TODO Skriv till fil
     }
 }
