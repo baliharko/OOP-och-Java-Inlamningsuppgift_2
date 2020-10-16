@@ -1,6 +1,5 @@
 package oop.sprint2.inlämningsuppgift2;
 
-import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -31,8 +30,8 @@ public class Gym {
     // read list of members from file using FileUtil-class
     // checks if instance is test
     private void initGymMembersList() {
-        this.gymMembers = this.test ? new FileUtil(true).initMembersList()
-                : new FileUtil().initMembersList();
+        this.gymMembers = this.test ? new FileUtil(true).getMembersFromFile()
+                : new FileUtil().getMembersFromFile();
     }
 
     // read list of gymvisits from file using FileUtil-class
@@ -42,6 +41,7 @@ public class Gym {
                 : new FileUtil().getVisitsFromFile();
     }
 
+    // Check if string is part of any member in list of members
     public MembershipStatus getMembershipStatus(String input) {
         if (isMember(input)) {
             Member member = this.getMemberFromList(input);

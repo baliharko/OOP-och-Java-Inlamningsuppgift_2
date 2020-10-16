@@ -46,7 +46,7 @@ public class FileUtil implements Serializable{
     }
 
     // reads customers file and returns a list of members
-    public List<Member> initMembersList() {
+    public List<Member> getMembersFromFile() {
         List<Member> memberList = new ArrayList<>();
 
         LocalDate dateJoined = null;
@@ -77,6 +77,8 @@ public class FileUtil implements Serializable{
         return Paths.get(this.gymVisitsPath);
     }
 
+    // Read current visits from file and overwrite list with added new visit
+    //instead of appending
     public void addToVisitsFile(Member member) {
         List<GymVisit> visits = getVisitsFromFile();
         try(ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(

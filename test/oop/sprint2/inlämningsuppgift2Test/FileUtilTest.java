@@ -28,7 +28,7 @@ public class FileUtilTest {
 
     @Test
     public final void createListFromFileTest() {
-        List<Member> actual = fu.initMembersList();
+        List<Member> actual = fu.getMembersFromFile();
         List<Member> expected = Arrays.asList(m1, m2, m3);
 
         assertEquals(expected.get(2).getName(), actual.get(2).getName());

@@ -96,13 +96,16 @@ public class Gym_Main {
                 List<GymVisit> visits = fileUtil.getVisitsFromFile();
 
                 clearTerminal();
+
                 System.out.println(String.format("%-20s %-18s %-10s", "Namn", "Personnummer", "Datum"));
                 System.out.println("==================================================");
-                for (GymVisit v : visits) {
+
+                for (GymVisit v : visits) { // Print all gymvisits
                     System.out.println(v.toString());
                 }
                 System.out.println("\nTryck [Enter] för att gå till huvudmenyn");
                 scan.nextLine();
+
                 clearTerminal();
             } else if (input.equalsIgnoreCase("3")) { // Exit
                 clearTerminal();
